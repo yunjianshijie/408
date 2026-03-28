@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林安 | 个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* 个人卡片 */
+        .profile-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0, 66, 133, 0.08);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #0052cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #003377;
+            margin-bottom: 0.5rem;
+        }
+
+        .bio {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-list {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .info-list li {
+            list-style: none;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        /* 聊天区域 */
+        .chat-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0, 66, 133, 0.08);
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0052cc;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-box {
+            height: 350px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            background: #fafbfc;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background-color: #eff6ff;
+            color: #1e40af;
+            padding: 0.8rem 1rem;
+            border-radius: 12px 12px 12px 0;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background-color: #0052cc;
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 12px 12px 0 12px;
+            margin-left: auto;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        #userInput:focus {
+            border-color: #0052cc;
+        }
+
+        #sendBtn {
+            padding: 0.9rem 1.4rem;
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        #sendBtn:hover {
+            background-color: #003377;
+        }
+
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem 0.8rem;
+            }
+            .chat-box {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 个人信息卡片 -->
+        <div class="profile-card">
+            <div class="avatar">林</div>
+            <div class="name">林安</div>
+            <div class="bio">一个正在学习用 AI 做产品的内容策划</div>
+
+            <ul class="info-list">
+                <li>📌 目前在做：整理自己的作品和写作方向</li>
+                <li>🎯 兴趣：AI 应用、写作、旅行</li>
+                <li>✨ 特点：喜欢把复杂问题讲成人话</li>
+            </ul>
+        </div>
+
+        <!-- 数字分身聊天区 -->
+        <div class="chat-section">
+            <div class="chat-title">
+                🤖 林安的数字分身
+            </div>
+            <div class="chat-box" id="chatBox">
+                <div class="message bot-message">
+                    你好～我是林安的数字分身，你可以问我关于林安的问题哦！
+                </div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="输入你想问的问题...">
+                <button id="sendBtn">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 数字分身知识库
+        const knowledge = {
+            "你在做什么": "我正在搭建个人主页、整理作品集，同时学习用AI做产品。",
+            "你有哪些作品": "目前正在整理中，后续会陆续放到主页上～",
+            "怎么联系你": "可以通过主页留言或社交账号联系，我会尽快回复。",
+            "你是谁": "我是林安，内容策划，正在学习用AI做产品。",
+            "你的兴趣": "AI应用、写作、旅行，也喜欢把复杂问题讲简单。",
+            "你的特点": "喜欢把复杂问题讲成人话，清晰好懂。"
+        };
+
+        const chatBox = document.getElementById("chatBox");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        // 发送消息
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // 用户消息
+            addMessage(text, "user");
+            userInput.value = "";
+
+            // 机器人回复
+            setTimeout(() => {
+                let reply = "你好！我暂时还不太理解这个问题，可以问我：你在做什么、有哪些作品、怎么联系你~";
+                
+                // 匹配知识库
+                for (let key in knowledge) {
+                    if (text.includes(key) || key.includes(text)) {
+                        reply = knowledge[key];
+                        break;
+                    }
+                }
+                addMessage(reply, "bot");
+            }, 600);
+        }
+
+        // 添加消息到页面
+        function addMessage(text, role) {
+            const div = document.createElement("div");
+            div.className = "message " + role + "-message";
+            div.textContent = text;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // 事件
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>

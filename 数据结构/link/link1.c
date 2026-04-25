@@ -37,28 +37,23 @@ void init(Node *head){
 }
 
 bool dev(int v,Node * head ){
-    // Node * h =head;
-    // while(h->next !=NULL){
-    //     if (h->next->value == v){
-    //         break;
-    //     }
-    //     h = h->next;
-    // }
-    // if (h->next->value!= v){
-    //     return false;
-    // }
-    // // 前驱
-    // Node *tmp =h->next;
-    // h->next =tmp ->next;
-    // free(tmp);
-    // return true;
-
-    if(head ==NULL){
-        return;
+    Node * h =head;
+    while(h->next !=NULL){
+        if (h->next->value == v){
+            break;
+        }
+        h = h->next;
     }
-    Node * del = head;
-    Node *
+    if (h->next->value!= v){
+        return false;
+    }
+    // 前驱
+    Node *tmp =h->next;
+    h->next =tmp ->next;
+    free(tmp);
+    return true;
 
+    
 
 }
 

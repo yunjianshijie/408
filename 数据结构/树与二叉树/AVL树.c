@@ -56,7 +56,6 @@ int getBalance(AVLNode *node)
     // 平衡因子：左边的高度减去右边的高度
     getHeight(node->left) - getHeight(node->right);
 }
-
 // 右旋
 AVLNode *rightRotate(AVLNode *x)
 {
@@ -70,7 +69,6 @@ AVLNode *rightRotate(AVLNode *x)
     updateHeight(y);
     return y;
 }
-
 // 左旋
 AVLNode *leftRotate(AVLNode *x){
     AVLNode * y = x->right;
@@ -84,8 +82,6 @@ AVLNode *leftRotate(AVLNode *x){
     updateHeight(y);
     return y;
 }
-
-
 // 插入值 更新节点
 AVLNode *Insert(AVLNode *node, int data)
 {
